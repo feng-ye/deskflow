@@ -38,6 +38,13 @@ IArchString::~IArchString()
 	}
 }
 
+void IArchString::init()
+{
+	if (s_mutex == NULL) {
+		s_mutex = ARCH->newMutex();
+	}
+}
+
 int
 IArchString::convStringWCToMB(char* dst,
 				const wchar_t* src, UInt32 n, bool* errors)

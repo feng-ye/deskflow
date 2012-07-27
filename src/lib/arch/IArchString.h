@@ -32,6 +32,8 @@ class IArchString : public IInterface {
 public:
 	virtual ~IArchString();
 
+	virtual void init();
+
 	//! Wide character encodings
 	/*!
 	The known wide character encodings
