@@ -28,7 +28,7 @@ class XArchEvalWindows : public XArchEval {
 public:
 	XArchEvalWindows() : m_error(GetLastError()) { }
 	XArchEvalWindows(DWORD error) : m_error(error) { }
-	virtual ~XArchEvalWindows() { }
+	virtual ~XArchEvalWindows() _NOEXCEPT { }
 
 	virtual std::string	eval() const;
 
@@ -40,7 +40,7 @@ private:
 class XArchEvalWinsock : public XArchEval {
 public:
 	XArchEvalWinsock(int error) : m_error(error) { }
-	virtual ~XArchEvalWinsock() { }
+	virtual ~XArchEvalWinsock()  _NOEXCEPT { }
 
 	virtual std::string	eval() const;
 

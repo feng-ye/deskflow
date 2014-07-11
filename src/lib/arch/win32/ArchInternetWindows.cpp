@@ -125,7 +125,7 @@ WinINetRequest::send()
 	openRequest();
 	
 	String headers("Content-Type: text/html");
-	if (!HttpSendRequest(m_request, headers.c_str(), (DWORD)headers.length(), NULL, NULL)) {
+	if (!HttpSendRequest(m_request, headers.c_str(), (DWORD)headers.length(), NULL, 0)) {
 		throw XArch(new XArchEvalWindows());
 	}
 	
@@ -154,7 +154,7 @@ WinINetRequest::openSession()
 		INTERNET_OPEN_TYPE_PRECONFIG,
 		NULL,
 		NULL,
-		NULL);
+		0);
 
 	if (m_session == NULL) {
 		throw XArch(new XArchEvalWindows());
@@ -171,8 +171,8 @@ WinINetRequest::connect()
 		NULL,
 		NULL,
 		INTERNET_SERVICE_HTTP,
-		NULL,
-		NULL);
+		0,
+		0);
 	
 	if (m_connect == NULL) {
 		throw XArch(new XArchEvalWindows());
@@ -190,7 +190,7 @@ WinINetRequest::openRequest()
 		NULL,
 		NULL,
 		m_url.m_flags,
-		NULL);
+		0);
 
 	if (m_request == NULL) {
 		throw XArch(new XArchEvalWindows());

@@ -29,7 +29,7 @@
 #endif
 #if HAVE_WCHAR_H || defined(_MSC_VER)
 #	include <wchar.h>
-#elif __APPLE__
+#elif __APPLE__ || defined(__GNUC__)
 	// wtf?  Darwin puts mbtowc() et al. in stdlib
 #	include <cstdlib>
 #else

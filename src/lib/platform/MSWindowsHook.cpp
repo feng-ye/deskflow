@@ -86,7 +86,7 @@ int
 MSWindowsHook::init(DWORD threadID)
 {
 	if (m_initFunc == NULL) {
-		return NULL;
+		return 0;
 	}
 	return m_initFunc(threadID);
 }
@@ -95,7 +95,7 @@ int
 MSWindowsHook::cleanup()
 {
 	if (m_cleanupFunc == NULL) {
-		return NULL;
+		return 0;
 	}
 	return m_cleanupFunc();
 }
