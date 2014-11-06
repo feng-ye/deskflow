@@ -25,6 +25,7 @@ include_directories(
 )
 
 add_library(synwinhk SHARED ${sources})
+set_target_properties(synwinhk PROPERTIES PREFIX "")
 
 # copy the dlls (and supporting files) from the lib dir to 
 # the bin dir, so that synergyc and synergys can easily find them.
@@ -32,9 +33,9 @@ add_library(synwinhk SHARED ${sources})
 # so that the bin dir remains tidy. the path is relative to the
 # build dir (in this case, that's: build\src\lib\platform).
 add_custom_command(
-	TARGET synwinhk 
+	TARGET synwinhk
 	POST_BUILD
-	COMMAND xcopy /Y /Q
-		..\\..\\..\\..\\lib\\${CMAKE_CFG_INTDIR}\\synwinhk.*
-		..\\..\\..\\..\\bin\\${CMAKE_CFG_INTDIR}\\
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		${LIBRARY_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}/synwinhk.dll
+		${EXECUTABLE_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}/
 )

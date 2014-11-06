@@ -1,11 +1,11 @@
 # synergy -- mouse and keyboard sharing utility
 # Copyright (C) 2012 Synergy Si Ltd.
 # Copyright (C) 2012 Nick Bolton
-# 
+#
 # This package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # found in the file LICENSE that should have accompanied this file.
-# 
+#
 # This package is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -22,11 +22,15 @@ if (SYNERGY_ADD_HEADERS)
 endif()
 
 add_library(winmmjoy SHARED ${sources})
+set_target_properties(winmmjoy PROPERTIES PREFIX "")
+target_link_libraries(winmmjoy Winmm)
 
 add_custom_command(
-	TARGET winmmjoy 
+	TARGET winmmjoy
 	POST_BUILD
-	COMMAND xcopy /Y /Q
-		..\\..\\..\\..\\..\\lib\\${CMAKE_CFG_INTDIR}\\winmmjoy.*
-		..\\..\\..\\..\\..\\bin\\${CMAKE_CFG_INTDIR}\\plugins\\
+	COMMAND ${CMAKE_COMMAND} -E make_directory
+		"${EXECUTABLE_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}/plugins/"
+	COMMAND ${CMAKE_COMMAND} -E copy_if_different
+		"${LIBRARY_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}/winmmjoy.dll"
+		"${EXECUTABLE_OUTPUT_PATH}/${CMAKE_CFG_INTDIR}/plugins/"
 )

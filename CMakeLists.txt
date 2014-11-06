@@ -323,9 +323,19 @@ else() # not-unix
 
 endif()
 
+if (MINGW)
+	include(CheckCXXCompilerFlag)
+	check_cxx_compiler_flag("-Wl,--start-group -Wl,--end-group"
+		HAVE_START_END_GROUP)
+	if (HAVE_START_END_GROUP)
+		set(START_GROUP "-Wl,--start-group")
+		set(END_GROUP "-Wl,--end-group")
+	endif()
+endif()
+
 add_subdirectory(src)
 
-if (WIN32)
+if (MSVC)
 	# TODO:	consider using /analyze to uncover potential bugs in the source code.
 
 	# /WX - warnings as errors (we have a problem with people checking in code with warnings).

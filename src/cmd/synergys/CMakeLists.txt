@@ -1,11 +1,11 @@
 # synergy -- mouse and keyboard sharing utility
 # Copyright (C) 2012 Synergy Si Ltd.
 # Copyright (C) 2009 Nick Bolton
-# 
+#
 # This package is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # found in the file LICENSE that should have accompanied this file.
-# 
+#
 # This package is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -58,7 +58,10 @@ endif()
 
 add_executable(synergys ${sources})
 target_link_libraries(synergys
-	arch base client common io mt net ipc platform server synergy ${libs})
+	${START_GROUP}
+	arch base client common io mt net ipc platform server synergy
+	${END_GROUP}
+	${libs})
 
 if (CONF_CPACK)
 	install(TARGETS
